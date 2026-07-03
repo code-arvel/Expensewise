@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget | ExpenseWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/budgets.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            ExpenseWise
+        </div>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
+            <li><a href="{{ url_for('expense_history') }}">Expense History</a></li>
+            <li><a href="{{ url_for('budget') }}" class="active">Budget</a></li>
+            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>Budget Management</h1>
+            <p>Set and monitor your spending budget.</p>
+        </div>
+
+        <!-- Budget Summary -->
+
+        <div class="budget-cards">
+
+            <div class="card">
+                <h3>Current Budget</h3>
+                <p>₦50,000</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Expenses</h3>
+                <p>₦18,500</p>
+            </div>
+
+            <div class="card">
+                <h3>Remaining Balance</h3>
+                <p>₦31,500</p>
+            </div>
+
+        </div>
+
+        <!-- Budget Form -->
+
+        <div class="budget-form-card">
+
+            <h2>Set Monthly Budget</h2>
+
+            <form method="POST">
+
+                <div class="form-group">
+                    <label for="budget_amount">Budget Amount (₦)</label>
+                    <input
+                        type="number"
+                        id="budget_amount"
+                        name="budget_amount"
+                        placeholder="Enter your monthly budget"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="save-btn">
+                    Save Budget
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Budget Progress -->
+
+        <div class="progress-card">
+
+            <h2>Budget Usage</h2>
+
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+            <p class="progress-text">
+                37% of your budget has been used.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

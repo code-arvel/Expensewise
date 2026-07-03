@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | ExpenseWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            ExpenseWise
+        </div>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
+            <li><a href="{{ url_for('expense_history') }}">Expense History</a></li>
+            <li><a href="{{ url_for('budget') }}">Budget</a></li>
+            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('profile') }}" class="active">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="profile-header">
+            <h1>My Profile</h1>
+            <p>Manage your account information</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="avatar">
+                JD
+            </div>
+
+            <form>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" value="Jack">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" value="Darzel">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" value="jack@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Registration Number</label>
+                    <input type="text" value="MOUAU/CMP/22/116558">
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="save-btn">
+                        Save Changes
+                    </button>
+
+                    <button type="button" class="password-btn">
+                        Change Password
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

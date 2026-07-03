@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseWise - Student Budget & Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            ExpenseWise
+        </div>
+
+        <nav class="nav-links">
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}" class="signup-btn">Sign Up</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-content">
+            <h1>Take Control of Your Student Finances</h1>
+
+            <p>
+                ExpenseWise helps students track expenses,
+                manage budgets, and build smart financial habits
+                for a secure future.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('register') }}" class="primary-btn">
+                    Get Started
+                </a>
+
+                <a href="{{ url_for('login') }}" class="secondary-btn">
+                    Login
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="features">
+
+        <h2>What ExpenseWise Offers</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <h3>Expense Tracking</h3>
+                <p>
+                    Record and monitor your daily spending with ease.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Budget Planning</h3>
+                <p>
+                    Create budgets and stay within your financial limits.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Financial Reports</h3>
+                <p>
+                    View spending summaries and understand your habits.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Goal Management</h3>
+                <p>
+                    Save towards academic and personal financial goals.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="why-us">
+
+        <h2>Why Choose ExpenseWise?</h2>
+
+        <div class="why-content">
+
+            <div class="why-card">
+                <h3>Student Focused</h3>
+                <p>
+                    Designed specifically for students and their financial needs.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <h3>Easy to Use</h3>
+                <p>
+                    Simple and intuitive interface for tracking expenses.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <h3>Better Financial Decisions</h3>
+                <p>
+                    Gain insights that help you spend smarter.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="cta">
+
+        <h2>Start Managing Your Finances Today</h2>
+
+        <p>
+            Join ExpenseWise and take the first step towards financial discipline.
+        </p>
+
+        <a href="{{ url_for('register') }}" class="cta-btn">
+            Create Free Account
+        </a>
+
+    </section>
+
+    <footer class="footer">
+        <p>
+            © 2026 ExpenseWise. All Rights Reserved.
+        </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - onBudget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <div class="company-name">ExpenseWise</div>
+
+        <nav class="nav-links">
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Sign Up</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Take Control of Your Student Finances</h1>
+        <p>
+            onBudget helps students track expenses, manage budgets,
+            and develop healthy financial habits throughout their academic journey.
+        </p>
+    </section>
+
+    <section class="about-section">
+        <h2>Who We Are</h2>
+
+        <p>
+            ExpenseWise is a student-focused budgeting and expense tracking platform
+            designed to help students make informed financial decisions.
+            We understand the challenges students face when managing limited
+            income, allowances, scholarships, and daily expenses.
+        </p>
+
+        <p>
+            Our goal is to provide a simple and effective tool that enables
+            students to monitor their spending habits, create realistic budgets,
+            and achieve their financial goals while focusing on their studies.
+        </p>
+    </section>
+
+    <section class="features-section">
+        <h2>What We Offer</h2>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <h3>Expense Tracking</h3>
+                <p>
+                    Record and monitor daily expenses to understand where your money goes.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Budget Planning</h3>
+                <p>
+                    Create personalized budgets and stay within your financial limits.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Financial Insights</h3>
+                <p>
+                    View spending summaries and identify areas where you can save money.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Goal Management</h3>
+                <p>
+                    Set savings targets and work towards achieving your financial objectives.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <h2>Our Mission</h2>
+
+        <p>
+            We believe that financial literacy is an essential life skill.
+            Our mission is to empower students with the tools and knowledge
+            needed to manage money responsibly and build a secure financial future.
+        </p>
+    </section>
+
+</body>
+</html>

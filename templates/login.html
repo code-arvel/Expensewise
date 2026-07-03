@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <div class="company-name">
+            ExpenseWise
+        </div>
+
+        <nav class="nav-links">
+            <a href="{{ url_for('about') }}">
+                About
+                <i class="bi bi-person-lines-fill"></i>
+            </a>
+
+            <a href="#">
+                
+                Contact
+                <i class="bi bi-telephone"></i>
+            </a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="login-container">
+
+            <h2>Login</h2>
+
+            <form>
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+
+                <p class="signup-text">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}">Sign Up</a>
+                </p>
+
+            </form>
+
+        </div>
+    </main>
+
+</body>
+</html>

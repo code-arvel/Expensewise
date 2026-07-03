@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | ExpenseWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            ExpenseWise
+        </div>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('add_expense') }}">Add Expense</a></li>
+            <li><a href="{{ url_for('expenses') }}">Expense History</a></li>
+            <li><a href="{{ url_for('budget') }}">Budget</a></li>
+            <li><a href="{{ url_for('reports') }}" class="active">Reports</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>Financial Reports</h1>
+            <p>Analyze your spending habits and budget performance.</p>
+        </div>
+
+        <!-- Summary Cards -->
+
+        <div class="summary-cards">
+
+            <div class="card">
+                <h3>Total Budget</h3>
+                <p>₦50,000</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Expenses</h3>
+                <p>₦18,500</p>
+            </div>
+
+            <div class="card">
+                <h3>Remaining Balance</h3>
+                <p>₦31,500</p>
+            </div>
+
+        </div>
+
+        <!-- Charts -->
+
+        <div class="charts-grid">
+
+            <div class="chart-card">
+                <h2>Expenses by Category</h2>
+
+                <div class="chart-placeholder">
+                    Pie Chart Placeholder
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Monthly Spending Trend</h2>
+
+                <div class="chart-placeholder">
+                    Bar Chart Placeholder
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Category Breakdown -->
+
+        <div class="breakdown-card">
+
+            <h2>Category Breakdown</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Total Spent</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Feeding</td>
+                        <td>₦8,000</td>
+                    </tr>
+
+                    <tr>
+                        <td>Transportation</td>
+                        <td>₦2,500</td>
+                    </tr>
+
+                    <tr>
+                        <td>Academic Materials</td>
+                        <td>₦3,500</td>
+                    </tr>
+
+                    <tr>
+                        <td>Entertainment</td>
+                        <td>₦4,500</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense | ExpenseWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_expense.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            ExpenseWise
+        </div>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('add_expense') }}" class="active">Add Expense</a></li>
+            <li><a href="{{ url_for('expense_history') }}">Expense History</a></li>
+            <li><a href="{{ url_for('budget') }}">Budget</a></li>
+            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>Add Expense</h1>
+            <p>Record a new expense and keep your finances up to date.</p>
+        </div>
+
+        <div class="expense-card">
+
+            <form method="POST">
+
+                <div class="form-group">
+                    <label for="amount">Amount (₦)</label>
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        placeholder="Enter amount"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+
+                    <select id="category" name="category" required>
+                        <option value="">Select Category</option>
+                        <option value="Feeding">Feeding</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Accommodation">Accommodation</option>
+                        <option value="Academic Materials">Academic Materials</option>
+                        <option value="Communication">Communication</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Personal Care">Personal Care</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="4"
+                        placeholder="What was this expense for?"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Expense Date</label>
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Save Expense
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
