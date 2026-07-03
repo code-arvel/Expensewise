@@ -1,6 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
+from models.database import users_collection
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
+
+app.secret_key = "expensewise_secret_key"
 
 @app.route('/')
 def home():
@@ -9,16 +14,56 @@ def home():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    return render_template('dashboard.html', firstname=session['firstname'])
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+
+    if request.method == 'POST':
+
+        email = request.form['email']
+
+        existing_user = users_collection.find_one({"email": email})
+        
+        if existing_user:
+            return "Email already exists"
+        
+        user = {
+            'firstname': request.form['firstname'],
+            'lastname': request.form['lastname'],
+            'email': request.form['email'],
+            'password': generate_password_hash(request.form['password']),
+            'reg_number': request.form['regnumber']
+        }
+
+        users_collection.insert_one(user)
+
+        return redirect(url_for('login'))
+    
+
     return render_template('register.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        user = users_collection.find_one({"email": email})
+
+        if user and check_password_hash(user['password'], password):
+            session['user_id'] = str(user['_id'])
+            session['firstname'] = user['firstname']
+
+            return redirect(url_for('dashboard'))
+        
+        return 'Invalid email or password'
+    
     return render_template('login.html')
 
 
@@ -69,7 +114,11 @@ def reports():
 
 @app.route('/logout')
 def logout():
-    return 'hello world'
+    session.clear()
+
+    return redirect(
+        url_for('login')
+    )
 
 
 @app.route('/expense history')
