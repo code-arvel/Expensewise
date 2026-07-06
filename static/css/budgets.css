@@ -152,23 +152,36 @@ body {
 
 /* Progress Bar */
 
-.progress-bar {
+.progress-container {
     width: 100%;
     height: 25px;
     background: #e5e7eb;
     border-radius: 30px;
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .progress-fill {
-    width: 37%;
     height: 100%;
-    background: #4683E5;
+    background: #4a7de1;
+    width: 0;
+    transition: width 0.5s ease;
 }
 
-.progress-text {
-    color: #666;
+.warning {
+    background: orange;
+}
+
+.danger {
+    background: red;
 }
 
 /* Responsive */

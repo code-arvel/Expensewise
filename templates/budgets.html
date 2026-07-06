@@ -87,16 +87,23 @@
 
         <!-- Budget Progress -->
 
-        <div class="progress-card">
+        <div class="budget-usage-card">
 
             <h2>Budget Usage</h2>
 
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
+            <div class="progress-container">
+
+                <div class="progress-bar">
+                    <div
+                        class="progress-fill {{ progress_class }}"
+                        style="width: {{ usage_percentage }}%;"
+                    ></div>
+                </div>
+
             </div>
 
-            <p class="progress-text">
-                37% of your budget has been used.
+            <p>
+                {{ usage_percentage|round(1) }}% of your budget has been used.
             </p>
 
         </div>

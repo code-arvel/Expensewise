@@ -35,9 +35,8 @@ def dashboard():
         category_totals[category] += amount
 
 
-
-
     total_expenses = sum(expense['amount'] for expense in expenses)
+
 
     remaining_balance = (budget_amount - total_expenses)
 
@@ -53,6 +52,7 @@ def dashboard():
         total_transactions=total_transactions,
         recent_expenses=recent_expenses,
         category_totals=category_totals,
+
         firstname=session['firstname']
     )
 
@@ -189,12 +189,29 @@ def budget():
         budget_amount - total_expenses
     )
 
+        #for progress bar
+    if budget_amount > 0:
+        usage_percentage = (total_expenses / budget_amount) * 100
+    else:
+        usage_percentage = 0
+
+    usage_percentage = min(usage_percentage, 100)
+
+    if usage_percentage >= 90:
+        progress_class = "danger"
+    elif usage_percentage >= 70:
+        progress_class = "warning"
+    else:
+        progress_class = ""
+
 
     return render_template(
         'budgets.html',
         budget_amount=budget_amount,
         total_expenses = total_expenses,
-        remaining_balance=remaining_balance
+        remaining_balance=remaining_balance,
+        usage_percentage = usage_percentage,
+        progress_class=progress_class,
     )
 
 @app.route('/expense')
