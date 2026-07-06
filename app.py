@@ -17,7 +17,44 @@ def dashboard():
     if 'user_id' not in session:
         return redirect(url_for('login'))
     
-    return render_template('dashboard.html', firstname=session['firstname'])
+    user_id = session['user_id']
+
+    budget = budgets_collection.find_one({ 'user_id': user_id })
+
+    budget_amount = (budget['budget_amount'] if budget else 0)
+
+    expenses = list(expenses_collection.find({ 'user_id': user_id }))
+    category_totals = {}
+    for expense in expenses:
+        category = expense['category']
+        amount = expense['amount']
+
+        if category not in category_totals:
+            category_totals[category] = 0
+
+        category_totals[category] += amount
+
+
+
+
+    total_expenses = sum(expense['amount'] for expense in expenses)
+
+    remaining_balance = (budget_amount - total_expenses)
+
+    total_transactions = len(expenses)
+
+    recent_expenses = list(expenses_collection.find({'user_id': user_id }).sort('_id', -1).limit(5))
+    
+    return render_template(
+        'dashboard.html',
+        budget_amount=budget_amount,
+        total_expenses=total_expenses,
+        remaining_balance=remaining_balance,
+        total_transactions=total_transactions,
+        recent_expenses=recent_expenses,
+        category_totals=category_totals,
+        firstname=session['firstname']
+    )
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -160,6 +197,9 @@ def budget():
         remaining_balance=remaining_balance
     )
 
+@app.route('/expense')
+def expenses():
+    return render_template('expenses.html')
 
 @app.route('/reports')
 def reports():

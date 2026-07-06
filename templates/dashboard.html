@@ -42,29 +42,27 @@
 
             <div class="card">
                 <h3>Total Budget</h3>
-                <p>₦50,000</p>
+                <p>₦{{ budget_amount }}</p>
             </div>
 
             <div class="card">
                 <h3>Total Expenses</h3>
-                <p>₦18,500</p>
+                <p>₦{{ total_expenses }}</p>
             </div>
 
             <div class="card">
                 <h3>Balance</h3>
-                <p>₦31,500</p>
+                <p>₦{{ remaining_balance }}</p>
             </div>
 
         </div>
 
         <!-- Chart Section -->
 
-        <div class="chart-section">
-            <h2>Monthly Spending Overview</h2>
+        <div class="chart-container">
+            <h2>Expenses by Category</h2>
 
-            <div class="chart-placeholder">
-                Chart will appear here
-            </div>
+            <canvas id="expenseChart"></canvas>
         </div>
 
         <!-- Transactions -->
@@ -84,25 +82,13 @@
                 </thead>
 
                 <tbody>
-
+                    {% for expense in recent_expenses %}
                     <tr>
-                        <td>01/07/2026</td>
-                        <td>Feeding</td>
-                        <td>₦2,000</td>
+                        <td>{{ expense.expense_date }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>₦{{ expense.amount }}</td>
                     </tr>
-
-                    <tr>
-                        <td>30/06/2026</td>
-                        <td>Transport</td>
-                        <td>₦500</td>
-                    </tr>
-
-                    <tr>
-                        <td>29/06/2026</td>
-                        <td>Books</td>
-                        <td>₦3,500</td>
-                    </tr>
-
+                    {% endfor %}
                 </tbody>
 
             </table>
@@ -113,5 +99,35 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const categoryData = {{ category_totals | tojson }};
+
+const labels = Object.keys(categoryData);
+const values = Object.values(categoryData);
+
+const ctx = document.getElementById('expenseChart');
+
+new Chart(ctx, {
+    type: 'pie',
+
+    data: {
+        labels: labels,
+
+        datasets: [{
+            data: values
+        }]
+    },
+
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+</script>
 </body>
 </html>
