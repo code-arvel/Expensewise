@@ -72,40 +72,18 @@
                 </thead>
 
                 <tbody>
-
+                    {% for expense in expenses %}
                     <tr>
-                        <td>01/07/2026</td>
-                        <td>Feeding</td>
-                        <td>Lunch at cafeteria</td>
-                        <td>₦2,000</td>
+                        <td>[01/07/2026]</td>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.description }}</td>
+                        <td>{{ expense.amount }}</td>
                         <td>
                             <button class="edit-btn">Edit</button>
                             <button class="delete-btn">Delete</button>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>30/06/2026</td>
-                        <td>Transportation</td>
-                        <td>Campus shuttle</td>
-                        <td>₦500</td>
-                        <td>
-                            <button class="edit-btn">Edit</button>
-                            <button class="delete-btn">Delete</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>29/06/2026</td>
-                        <td>Academic Materials</td>
-                        <td>Textbook purchase</td>
-                        <td>₦3,500</td>
-                        <td>
-                            <button class="edit-btn">Edit</button>
-                            <button class="delete-btn">Delete</button>
-                        </td>
-                    </tr>
-
+                    {% endfor %}
                 </tbody>
 
             </table>

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from models.database import users_collection
+from models.database import users_collection, expenses_collection, budgets_collection
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -92,19 +92,73 @@ def profile():
     )
 
 
-@app.route('/add-expense')
+@app.route('/add-expense', methods=['GET', 'POST'])
 def add_expense():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        expense = {
+            'user_id': session['user_id'],
+            'amount': float(
+                request.form['amount']
+            ),
+            'category': request.form['category'],
+            'description': request.form['description'],
+            'expense_date': request.form['expense_date'],
+            'created_at': datetime.utcnow()
+        }
+
+        expenses_collection.insert_one(expense)
+        return redirect(url_for('expense_history'))
+    
     return render_template('add_expense.html')
 
 
-@app.route('/expenses')
-def expenses():
-    return "<h1>Expense History Page</h1>"
 
-
-@app.route('/budget')
+@app.route('/budget', methods=['GET', 'POST'])
 def budget():
-    return render_template('budgets.html')
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        budget_amount = float(request.form['budget_amount'])
+        budgets_collection.update_one(
+            {'user_id': session['user_id']},
+            {'$set': {
+                'budget_amount': budget_amount
+            }},
+            upsert=True
+        )
+
+        return redirect(url_for('budget'))
+    
+    budget = budgets_collection.find_one({'user_id': session['user_id']})
+   
+    expenses = list(expenses_collection.find({'user_id': session["user_id"]}))
+    
+    total_expenses = sum(
+        expense['amount']
+        for expense in expenses
+    )
+
+    budget_amount = (
+        budget['budget_amount']
+        if budget
+        else 0
+    )
+   
+    remaining_balance = (
+        budget_amount - total_expenses
+    )
+
+
+    return render_template(
+        'budgets.html',
+        budget_amount=budget_amount,
+        total_expenses = total_expenses,
+        remaining_balance=remaining_balance
+    )
 
 
 @app.route('/reports')
@@ -123,7 +177,17 @@ def logout():
 
 @app.route('/expense history')
 def expense_history():
-    return render_template('expense_history.html')
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    expenses = list(
+        expenses_collection.find({
+            'user_id': session['user_id']
+        })
+    )
+
+
+    return render_template('expense_history.html', expenses=expenses)
 
 
 
