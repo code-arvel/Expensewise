@@ -39,20 +39,24 @@
 
         <!-- Filters -->
         <div class="filters">
+            <form method="GET" action="{{ url_for('expense_history') }}">
+                <input type="text" name="search" value=""{{ search_query }} placeholder="Search expenses...">
 
-            <input type="text" placeholder="Search expenses...">
+                <select>
+                    <option value="">All Categories</option>
+                    <option value="Feeding">Feeding</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Accomodation">Accommodation</option>
+                    <option value="Academic Materials">Academic Materials</option>
+                    <option value="Communication">Communication</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Personal Care">Personal Care</option>
+                    <option value="Others">Others</option>
+                </select>
 
-            <select>
-                <option>All Categories</option>
-                <option>Feeding</option>
-                <option>Transportation</option>
-                <option>Accommodation</option>
-                <option>Academic Materials</option>
-                <option>Communication</option>
-                <option>Entertainment</option>
-                <option>Personal Care</option>
-                <option>Others</option>
-            </select>
+                <button type="submit">Search</button>
+            </form>
+            
 
         </div>
 
@@ -74,13 +78,15 @@
                 <tbody>
                     {% for expense in expenses %}
                     <tr>
-                        <td>[01/07/2026]</td>
+                        <td>{{ expense.expense_date }}</td>
                         <td>{{ expense.category }}</td>
                         <td>{{ expense.description }}</td>
                         <td>{{ expense.amount }}</td>
                         <td>
                             <button class="edit-btn">Edit</button>
-                            <button class="delete-btn">Delete</button>
+                            <a href="/delete-expense/{{ expense._id }}">
+                                <button class="delete-btn">Delete</button>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from models.database import users_collection, expenses_collection, budgets_collection
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
@@ -151,6 +152,12 @@ def add_expense():
     
     return render_template('add_expense.html')
 
+@app.route('/delete-expense/<expense_id>')
+def delete_expense(expense_id):
+
+    expenses_collection.delete_one({ '_id': ObjectId(expense_id) })
+
+    return redirect(url_for('expense_history'))
 
 
 @app.route('/budget', methods=['GET', 'POST'])
@@ -240,7 +247,7 @@ def expense_history():
     expenses = list(
         expenses_collection.find({
             'user_id': session['user_id']
-        })
+        }).sort('_id', -1)
     )
 
 
